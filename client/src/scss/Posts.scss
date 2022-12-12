@@ -1,0 +1,17 @@
+@import './reset';
+
+.post-area {
+    @include set-width(100%);
+    @include set-height(100%);
+    @include set-padding(10px, null, null, null);
+    @include set-box-sizing(border-box);
+}
+
+.post-title {
+    @include set-font-weight(700);
+    @include set-padding(20px, 0, 10px, 0);
+}
+
+.post-card-area {
+    @include set-margin(auto, 0, 0, 0);
+}

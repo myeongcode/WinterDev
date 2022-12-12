@@ -1,0 +1,38 @@
+@import './reset.scss';
+
+.card-layout {
+    @include set-justify-content(space-between);
+    @include set-color(inherit);
+    @include set-text-decoration(none);
+    @include set-flex-direction(row);
+    @include set-display(flex);
+    @include set-margin(20px, 0px, 20px, 0px);
+    @include set-shadow(0px, 0px, 10px, gray);
+    @include set-border-radius(10px);
+}
+
+.card-contents-box {
+    @include set-display(flex);
+    @include set-flex-direction(column);
+    @include set-justify-content(space-between);
+    @include set-flex-grow(1);
+}
+
+.card-post-title {
+    @extend .card-post-subtitle;
+    @include set-font-weight(600);
+}
+
+.card-post-subtitle {
+    @include set-margin(10px, null, null, null);
+}
+
+.card-post-inform {
+    @include set-font-size(12px);
+    @include set-margin(0px, 0px, 0px, 10px);
+    @include set-color(gray);
+}
+
+.card-post-media {
+    @include set-width(200px);
+}

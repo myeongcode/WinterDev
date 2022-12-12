@@ -1,0 +1,17 @@
+@import './reset.scss';
+
+
+.navbar-toolbar {
+    @include set-justify-content(space-between);
+}
+
+.navbar-blogname {
+    @include set-text-decoration(none);
+    @include set-color(inherit);
+    @include set-margin(0px, 70px, 0px, 0px);
+    @include set-font-weight(600);
+}
+
+.navbar-button {
+    @include set-color(inherit);
+}

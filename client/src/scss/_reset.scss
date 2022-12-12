@@ -1,0 +1,84 @@
+
+// Size
+@mixin set-margin($top, $right, $bottom, $left) {
+    margin : $top $right $bottom $left !important;
+}
+
+@mixin set-padding($top, $right, $bottom, $left) {
+    padding : $top $right $bottom $left !important;
+}
+
+@mixin set-width($width) {
+    width: $width !important;
+}
+
+@mixin set-height($height) {
+    height: $height !important;
+}
+
+@mixin set-flex-grow($grow) {
+    flex-grow: $grow;
+}
+
+// Attribute
+@mixin set-display($display) {
+    display: $display;
+}
+
+@mixin set-justify-content($justify-content) {
+    justify-content: $justify-content;
+}
+
+@mixin set-flex-direction($direction) {
+    flex-direction: $direction;
+}
+
+@mixin set-box-sizing($sizing) {
+    box-sizing: $sizing;
+}
+
+@mixin set-align-item($align) {
+    align-items: $align;
+}
+
+// Effect
+
+@mixin set-shadow($width, $height, $spread, $color) {
+    box-shadow: $width $height $spread $color !important;
+}
+
+@mixin set-border-radius($size) {
+    border-radius: $size !important;
+}
+
+@mixin set-border($size, $border, $color) {
+    border: $size $border $color;
+}
+
+// Color
+@mixin set-color($color) {
+    color: $color !important;
+}
+
+@mixin set-background($color) {
+    background-color: $color;
+}
+
+// Text
+@mixin set-font-size($size) {
+    font-size: $size;
+}
+
+@mixin set-text-decoration($decoration) {
+    text-decoration: $decoration;
+}
+
+@mixin set-font-weight($weight) {
+    font-weight: $weight !important;
+}
+
+@mixin set-text-align($align) {
+    text-align: $align;
+}
+
+// Position

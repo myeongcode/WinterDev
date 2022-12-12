@@ -1,0 +1,56 @@
+@import './reset';
+
+.profile-container {
+    @include set-box-sizing(border-box);
+    @include set-padding(10px, null, null, null);
+    @include set-width(100%);
+    @include set-height(1100px);
+}
+
+.profile-card {
+    @include set-display(flex);
+    @include set-box-sizing(border-box);
+    @include set-width(100%);
+    @include set-height(100%);
+    @include set-flex-direction(column);
+    @include set-padding(20px, null, null, null);
+    @include set-justify-content(center);
+    @include set-border-radius(10px);
+    @include set-shadow(0px, 0px, 5px, gray);
+}
+
+.profile-box {
+    @include set-display(flex);
+    @include set-flex-direction(column);
+    @include set-text-align(center);
+    @include set-align-item(center);
+}
+
+.profile-avatar-circle {
+    @include set-padding(5px, null, null, null);
+    @include set-border-radius(50%);
+    @include set-border(0.5px, solid, gray);
+}
+
+.profile-avatar {
+    @include set-width(150px);
+    @include set-height(150px);
+}
+
+.profile-name-box {
+    @include set-margin(20px, 0px, 10px, 0px);
+}
+
+.profile-explain-box {
+    @include set-margin(10px, 0px, 10px, 0px);
+}
+
+.profile-social-box {
+    @include set-display(flex);
+    @include set-flex-direction(row);
+    @include set-margin(10px, 0px, 0px, 0px);
+}
+
+.profile-social {
+    @include set-shadow(0px, 0px, 10px, gray);
+}
