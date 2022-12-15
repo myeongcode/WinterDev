@@ -8,7 +8,7 @@ const Main = (props) => {
     <Container>
       <Grid container spacing={1}>
         <Grid item xs={9}>
-            <Posts user={props.user} />
+            <Posts user={props.user} post={props.post} />
         </Grid>
         <Grid item xs={3}>
             <Profile user={props.user} />

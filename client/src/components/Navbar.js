@@ -65,7 +65,7 @@ const Navbar = (props) => {
                             className='navbar-button'
                         >
                             <Typography>
-                                {props.user[0].name}
+                                {props.user.name}
                             </Typography>
                             
                         </Button>

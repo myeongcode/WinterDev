@@ -14,10 +14,14 @@ const Posts = (props) => {
                 최신글
             </Typography>
             <Box className='post-card-area'>
-                <Cards user={props.user} />
-                <Cards user={props.user} />
-                <Cards user={props.user} />
-                <Cards user={props.user} />
+                {
+                    props.post.map((data, i) => {
+                        return(
+                            <Cards user={props.user} key={i} data={data} />
+                        )
+                    })
+                }
+                
             </Box>
         </Box>
     )

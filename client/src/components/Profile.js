@@ -18,34 +18,34 @@ const Profile = (props) => {
                         variant='h5'
                         className='profile-name-box'
                     >
-                        {props.user[0].name}
+                        {props.user.name}
                     </Typography>
                     <Typography
                         variant='subtitle2'
                         className='profile-explain-box'
                     >
-                        {props.user[0].blogExplain}
+                        {props.user.blogExplain}
                     </Typography>
                     <Box className='profile-social-box'>
                         <>
-                            <IconButton aria-label='github' href={props.user[0].githubLink}>
+                            <IconButton aria-label='github' href={props.user.githubLink}>
                                 <Avatar src='/static/images/icons/github.png' sx={{
                                     boxShadow : '0px 0px 10px gray'
                                 }} />
                             </IconButton>
                         </>
                         <>
-                            <IconButton href={props.user[0].instagramLink}>
+                            <IconButton href={props.user.instagramLink}>
                                 <Avatar src='/static/images/icons/instagram.png' className='profile-social'/>
                             </IconButton>
                         </>
                         <>
-                            <IconButton href={props.user[0].linkedInLink}>
+                            <IconButton href={props.user.linkedInLink}>
                                 <Avatar src='/static/images/icons/linkedin.png' className='profile-social'/>
                             </IconButton>
                         </>
                         <>
-                            <IconButton href={props.user[0].homePageLink}>
+                            <IconButton href={props.user.homePageLink}>
                                 <Avatar src='/static/images/icons/link.png' className='profile-social'/>
                             </IconButton>
                         </>

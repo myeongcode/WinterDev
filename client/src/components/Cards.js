@@ -17,19 +17,19 @@ const Cards = (props) => {
                         component='div' 
                         className='card-post-title'
                     >
-                        제목
+                        {props.data.title}
                     </Typography>
                     <Typography 
                         variant='subtitle1' 
                         component='div' 
                         className='card-post-subtitle'
                     >
-                        글 주제
+                        {props.data.topic}
                     </Typography>
                 </CardContent>
                 <CardContent>
                     <Typography variant='p' component='div' className='card-post-inform'>
-                        {props.user[0].name}, 2022년 12월 10일 10:50pm
+                        {props.user.name}, 2022년 12월 10일 10:50pm
                     </Typography>
                     
                 </CardContent>
