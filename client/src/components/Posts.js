@@ -4,6 +4,7 @@ import {Box, Typography} from '@mui/material';
 import Cards from './Cards';
 
 const Posts = (props) => {
+
     return(
         <Box className='post-area'>
             <Typography
@@ -17,7 +18,7 @@ const Posts = (props) => {
                 {
                     props.post.map((data, i) => {
                         return(
-                            <Cards user={props.user} key={i} data={data} />
+                            <Cards user={props.user} key={i} data={data} index={i}/>
                         )
                     })
                 }

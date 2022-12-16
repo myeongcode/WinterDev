@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../scss/Cards.scss';
 import {Box, Card, CardContent, Typography, CardMedia} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Cards = (props) => {
+
+    const navigate = useNavigate();
+
+    function handleOnPath() {
+        const cardURL = `/detail/${props.index}`;
+        navigate(cardURL);
+    }
+
     return (
         <Card
             variant='div'
             component='a'
-            href='/'
             className='card-layout'
+            onClick={handleOnPath}
             >
             <Box className='card-contents-box'>
                 <CardContent>
@@ -29,9 +38,8 @@ const Cards = (props) => {
                 </CardContent>
                 <CardContent>
                     <Typography variant='p' component='div' className='card-post-inform'>
-                        {props.user.name}, 2022년 12월 10일 10:50pm
+                        {props.user.name}, {props.data.submitDate}
                     </Typography>
-                    
                 </CardContent>
             </Box>
             <CardMedia 

@@ -9,7 +9,7 @@ const Write = (props) => {
     <Container>
       <Grid container spacing={1}>
         <Grid item xs={9}>
-            <WritePost />
+            <WritePost handleOnAlert={props.handleOnAlert}/>
         </Grid>
         <Grid item xs={3}>
             <Profile user={props.user} />

@@ -11,47 +11,6 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// mongoose.set('strictQuery', false);
-
-// mongoose.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?retryWrites=true&w=majority', (error) => {
-//     if(!error) {
-//         console.log('Database connected');
-//     } else {
-//         console.log(error);
-//     }
-// });
-
-// const mongooseDB = mongoose.connection;
-
-// mongooseDB.on('err', (err) => {
-//     console.log('DB error : ', error);
-// })
-// mongooseDB.once('open', () => {
-//     console.log('Connected to DB');
-// })
-
-// const userSchema = new mongoose.Schema({
-//   name : String,
-//   gender : String,
-//   blogExplain : String,
-//   instagramLink : String,
-//   linkedInLink : String,
-//   homePageLink : String
-// });
-
-// const userModel = mongoose.model('user', userSchema);
-
-// const user = new userModel(
-//     {
-//     name : "WooMyeonggyu",
-//     gender : "남자",
-//     blogExplain : "안녕하세요! 제 블로그에 오신 것을 환영합니다. 일상을 기록하기 위한 블로그입니다! 많이 봐주세요 :)",
-//     instagramLink : "https://www.instagram.com/woo__m_98/",
-//     linkedInLink : "https://www.linkedin.com/in/myeonggyu-woo-396068245/",
-//     homePageLink : "https://myeongcode.github.io/"
-//     }
-// );
-
 MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?retryWrites=true&w=majority', function(error, client) {
     if(error) {
         return console.log(error);
@@ -71,11 +30,21 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
 
     //누군가가 /create경로로 post요청을 하면 데이터베이스의 post인 콜렉션에 결과값을 저장해주세요
     app.post('/create', (req, res) => {
-        db.collection('post').insertOne(req.body, (result, error) => {
-            if(error) {
-                return console.log(error);
-            }
-            console.log(result);
+        db.collection('counter').findOne({name : 'postCounter'}, (error, result) => {
+            const totalPost = result.totalPost;
+
+            db.collection('post').insertOne({_id : totalPost, ...req.body}, function(error, result) {
+                if(error) {
+                    return console.log(error);
+                } 
+                totalPost + 1;
+                db.collection('counter').updateOne({name : 'postCounter'},{$inc : {totalPost : 1} }, function(error, result) {
+                    if(error) {
+                        console.log(error);
+                    }
+                    res.status(200).json({message : '글 게시 완료!'});
+                })
+            })
         })
     })
 

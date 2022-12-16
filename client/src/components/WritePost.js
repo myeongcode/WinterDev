@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Box, Card, Typography, TextField, Button, FormControl } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import '../scss/WritePost.scss';
+import { Box, Card, Typography, TextField, Button, FormControl, Alert } from '@mui/material';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 
 
-const WritePost = () => {
+const WritePost = (props) => {
   
   const [contents, setContents] = useState("");
   const [title, setTitle] = useState("");
@@ -25,54 +26,42 @@ const WritePost = () => {
   
   const onSubmit = (e) => {
     e.preventDefault();
-
-    setContents("");
-    setTitle("");
-    setTopic("");
-
+    const date = new Date();
+    const submitDate = date.toLocaleString('ko-kr');
+    
     const variables = {
       title : title,
       topic : topic,
-      contents : contents
+      contents : contents,
+      submitDate : submitDate,
     }
-
+    
     axios.post('http://localhost:8080/create', variables)
-    .then((result) => {
-      console.log(result);
+    .then((response) => {
+      if(response) {
+        props.handleOnAlert('success', response.data.message);
+        setTimeout(() => {
+          window.location.href= '/';
+        }, 2000)
+      }
+      
     })
     .catch((error) => {
       console.log(error);
     })
-  
-
-}
-
-  
+  }
 
   return (
-    <Box sx={{
-        boxSizing : 'border-box',
-        padding : '10px',
-        width : '100%',
-        height : '1100px',
-    }}>
+    <Box className='write-area'>
         <Card
             component='div'
-            sx={{
-                boxSizing : 'border-box',
-                padding : '20px',
-                width : '100%',
-                height : '100%',
-                borderRadius : '10px',
-                boxShadow : '0px 0px 5px gray'
-        }}>
-            <FormControl onSubmit={onSubmit}>
-              <TextField name='title' onChange={onChangeTitle} fullWidth label='글 제목' variant='outlined' />
-              <TextField name='topic' onChange={onChangeTopic} fullWidth label='글 주제' variant='outlined' />
-              <ReactQuill value={contents} onChange={onChangeContents}/>
-              <Button variant='contained' onClick={onSubmit}>버튼</Button>
+            className='write-card-area'>
+            <FormControl onSubmit={onSubmit} fullWidth>
+              <TextField className='write-content' name='title' onChange={onChangeTitle} label='글 제목' variant='outlined' />
+              <TextField className='write-content' name='topic' onChange={onChangeTopic} label='글 주제' variant='outlined' />
+              <ReactQuill className='write-editor' value={contents} onChange={onChangeContents} />
+              <Button variant='contained' onClick={onSubmit}>글 게시</Button>
             </FormControl>
-            {/* <div dangerouslySetInnerHTML={{__html : contents}} /> */}
         </Card>
     </Box>
   )

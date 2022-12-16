@@ -1,0 +1,25 @@
+@import './reset.scss';
+@import './Posts.scss';
+
+.write-area {
+    @extend .post-area;
+}
+
+.write-card-area { 
+    @include set-box-sizing(border-box);
+    @include set-padding(20px, null, null, null);
+    @include set-width(100%);
+    @include set-height(100%);
+    @include set-border-radius(10px);
+    @include set-shadow(0px, 0px, 5px, gray);
+}
+
+.write-content {
+    @include set-padding(0, 0, 20px, 0);
+}
+
+.write-editor {
+    @extend .write-content;
+    @include set-height(800px);
+    @include set-padding(0, 0, 50px, 0);
+}

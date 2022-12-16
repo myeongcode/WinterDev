@@ -1,22 +1,26 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import {Box, Typography} from '@mui/material';
+import React from 'react'
+import { useParams } from 'react-router-dom';
 
-const PostPage = () => {
 
-  const [data, setData] = useState('');
+const PostPage = (props) => {
 
-  useEffect(() => {
-    axios.get('/api/post')
-    .then((result) => {
-      setData(result.data);
-      console.log(result);
-    })
-  })
+  const {id} = useParams();
 
   return (
-    <div>
-        {data}
-    </div>
+    <Box>
+        {
+          props?.post[id] ?
+          <div>
+            {props.post[id].title}
+            {props.post[id].topic}
+            <div dangerouslySetInnerHTML={{ __html : props.post[id].contents }} />
+            
+          </div>
+          : <p>Loading...</p>
+        }
+        
+    </Box>
   )
 }
 
