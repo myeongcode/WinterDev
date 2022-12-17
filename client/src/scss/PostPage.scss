@@ -1,0 +1,26 @@
+@import './reset';
+@import './Posts.scss';
+@import './WritePost.scss';
+
+.post-page-area {
+    @extend .post-area;
+}
+
+.post-page-card {
+    @extend .write-card-area;
+    @include set-min-height(1100px);
+}
+
+.post-page-date {
+    @include set-color(rgb(183, 183, 183));
+}
+
+.post-page-title {
+    @include set-font-weight(600);
+    @include set-padding(5px, 0, 20px, 0);
+}
+
+.post-page-content {
+    @include set-padding(10px, 0, 0, 0);
+    @include set-word-break(break-all);
+}

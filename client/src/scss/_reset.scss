@@ -20,6 +20,10 @@
     flex-grow: $grow;
 }
 
+@mixin set-min-height($min-height) {
+    min-height: $min-height !important;
+}
+
 // Attribute
 @mixin set-display($display) {
     display: $display;
@@ -39,6 +43,10 @@
 
 @mixin set-align-item($align) {
     align-items: $align;
+}
+
+@mixin set-word-break($word-break) {
+    word-break: $word-break;
 }
 
 // Effect

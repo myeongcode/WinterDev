@@ -27,7 +27,7 @@ const App = () => {
 
     axios.get('/api/post')
     .then((result) => {
-      setPost(result.data);
+      
     })
     .catch((error) => {
       console.log(error);
@@ -59,7 +59,7 @@ const App = () => {
       >{alert.message}</Alert>
       <Routes>
         <Route path='/' element={
-          <Main user={user} post={post} />
+          <Main user={user} post={post} setPost={setPost}/>
         } />
         <Route path='/write' element={
           <Write user={user} handleOnAlert={handleOnAlert}/>

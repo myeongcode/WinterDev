@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
-//const mongoose = require('mongoose');
 var cors = require('cors');
 var db;
 
@@ -63,9 +62,6 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
         })
     })
     
-    
-
-
     //누군가 다른 경로로 get요청을 하면 알아서 라우팅해주세요
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, '../client/build/index.html'));
