@@ -1,20 +1,28 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-import Main from './pages/Main';
-import Write from './pages/Write';
 import PostPage from './pages/PostPage';
+import Home from './pages/Home';
+import WritePage from './pages/WritePage';
+import UpdatePage from './pages/UpdatePage';
 import Navbar from './components/Navbar';
 import axios from 'axios';
-import { Container, Alert } from '@mui/material';
+import { Container, Snackbar } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
 import { Routes, Route } from 'react-router-dom';
-import { textAlign } from '@mui/system';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const App = () => {
+  console.log('App 페이지 재랜더링');
   
-  const [user, setUser] = useState([{}]);
-  const [post, setPost] = useState([{}]);
-  const [alert, setAlert] = useState({});
+  const [user, setUser] = useState([]);
+  const [posts, setPosts] = useState([]);
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState({});
+
 
   useEffect(() => {
     axios.get('/api/user')
@@ -24,50 +32,61 @@ const App = () => {
     .catch((error) => {
       console.log(error);
     })
+  }, []);
 
+  useEffect(() => {
     axios.get('/api/post')
     .then((result) => {
-
+      setPosts(result.data);
     })
     .catch((error) => {
       console.log(error);
     })
-  }, [])
+  }, []);
+  
 
-  const handleOnAlert = (severity, message) => {
-    setAlert({severity : severity, message : message});
-    document.querySelector('.write-alert').style.display = 'flex';
-    setTimeout(() => {
-      document.querySelector('.write-alert').style.display = 'none';
-    }, 1000)
-  }
+
+  const handleAlertClick = (severity, message) => {
+    setAlertMessage({
+      severity: severity,
+      message : message
+    })
+    setAlertOpen(true);
+  };
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlertOpen(false);
+  };
 
   return (
     <Container maxWidth={false} disableGutters>
+
       <Navbar user={user} />
-      <Alert className='write-alert' severity={alert.severity}
-        sx = {{
-        position : 'absolute',
-        left : '0',
-        right : '0',
-        top : '100px',
-        marginLeft : 'auto',
-        marginRight : 'auto',
-        width : '200px',
-        display : 'none',
-      }}
-      >{alert.message}</Alert>
+
+      <Snackbar open={alertOpen} autoHideDuration={1800} onClose={handleAlertClose}>
+        <Alert onClose={handleAlertClose} severity={alertMessage.severity} sx={{ width: '100%' }}>
+          {alertMessage.message}
+        </Alert>
+      </Snackbar>
+
       <Routes>
         <Route path='/' element={
-          <Main user={user} post={post} setPost={setPost}/>
+          <Home posts={posts} user={user} setPosts={setPosts} />
         } />
         <Route path='/write' element={
-          <Write user={user} handleOnAlert={handleOnAlert}/>
+          <WritePage handleAlertClick={handleAlertClick} />
         } />
         <Route path='/detail/:id' element={
-          <PostPage post={post} />
+          <PostPage posts={posts} handleAlertClick={handleAlertClick} />
+        } />
+        <Route path='/edit/:id' element={
+          <UpdatePage />
         } />
       </Routes>
+
     </Container>
   )
 }

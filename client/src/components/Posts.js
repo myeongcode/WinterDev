@@ -2,33 +2,48 @@ import React, { useEffect, useState } from 'react';
 import '../scss/Posts.scss';
 import {Box, Pagination, Typography} from '@mui/material';
 import Cards from './Cards';
-import axios from 'axios';
-import paginationService from '../services/paginationService';
+import usePagination from '../services/Pagination';
+
+
 
 const Posts = (props) => {
+    console.log('Posts컴포넌트 재랜더링');
+    
+    // const [pagination, setPagination] = useState({
+    //     count : 0,
+    //     from : 0,
+    //     to : pageSize
+    // })
 
-    const pageSize = 4;
+    // const _DATA = usePagination(props.posts);
 
-    const [pagination, setPagination] = useState({
-        count : 0,
-        from : 0,
-        to : pageSize
-    })
+    // useEffect(() => {
+    //     _DATA.getData({from : pagination.from, to : pagination.to})
+    //     .then((response) => {
+    //         setPagination({...pagination, count : response.count});
+    //         props.setPosts(response.data);
+    //     })
+    // }, [pagination.from, pagination.to]);
 
-    useEffect(() => {
-        paginationService.getData({from : pagination.from, to : pagination.to})
-        .then((response) => {
-            setPagination({...pagination, count:response.count});
-            props.setPost(response.data);
-        })
-    }, [pagination.from, pagination.to]);
+    // const handlePageChange = (event, page) => {
+    //     const from = (page - 1) * pageSize;
+    //     const to = (page - 1) * pageSize + pageSize;
 
-    const handlePageChange = (event, page) => {
-        const from = (page - 1) * pageSize;
-        const to = (page - 1) * pageSize + pageSize;
-        
-        setPagination({...pagination, from : from, to : to});
-    }
+    //     setPagination({...pagination, from : from, to : to});
+    // }
+
+
+    
+
+    // useEffect(() => {
+    //     paginationService.getData({from : pagination.from, to : pagination.to})
+    //     .then((response) => {
+    //         setPagination({...pagination, count:response.count});
+    //         props.setPosts(response.data);
+    //     })
+    // }, [pagination.from, pagination.to]);
+
+    
 
     return(
         <Box className='post-area'>
@@ -41,9 +56,9 @@ const Posts = (props) => {
             </Typography>
             <Box className='post-card-area'>
                 {
-                    props.post.map((data, i) => {
+                    props.posts.map((post, idx) => {
                         return(
-                            <Cards user={props.user} key={i} data={data} index={i}/>
+                            <Cards user={props.user} key={idx} post={post} idx={idx}/>
                         )
                     })
                 }
@@ -53,7 +68,7 @@ const Posts = (props) => {
                 alignItems : 'center',
                 justifyContent : 'center',
             }}>
-                <Pagination count={Math.ceil(pagination.count / pageSize)} onChange={handlePageChange} color='primary' />
+                {/* <Pagination color='primary' /> */}
             </Box>
         </Box>
     )

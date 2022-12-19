@@ -1,6 +1,6 @@
 import React from 'react';
 import '../scss/Navbar.scss';
-import {Container, AppBar, Toolbar, Typography, Stack, Button, Menu, MenuItem, Divider, Avatar} from '@mui/material';
+import {Container, AppBar, Toolbar, Typography, Stack, Button, Menu, MenuItem, Divider, Avatar } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from 'react';
 
@@ -64,9 +64,21 @@ const Navbar = (props) => {
                             endIcon={<KeyboardArrowDownIcon />}
                             className='navbar-button'
                         >
-                            <Typography>
-                                {props.user.name}
-                            </Typography>
+                            {
+                                props.user.name ?
+                                (
+                                        <div className='user-name-box'>
+                                            {props.user?.name}
+                                        </div>
+                                )
+                                :
+                                (
+                                    <Typography>
+                                        Name Loading..
+                                    </Typography>
+                                )
+                            }
+                            
                             
                         </Button>
                     </Stack>

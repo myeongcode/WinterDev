@@ -34,7 +34,7 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
 
             db.collection('post').insertOne({_id : totalPost, ...req.body}, function(error, result) {
                 if(error) {
-                    return console.log(error);
+                    res.status(400).json({message : '글 게시 실패'});
                 } 
                 totalPost + 1;
                 db.collection('counter').updateOne({name : 'postCounter'},{$inc : {totalPost : 1} }, function(error, result) {
@@ -46,6 +46,23 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
             })
         })
     })
+
+    //누군가가 /delete경로로 delete요청을 하면 데이터베이스의 post인 콜렉션에서 해당 데이터를 하나 삭제해주세요
+    app.delete('/delete', (req, res) => {
+        req.body._id = parseInt(req.body._id);
+        console.log(req.body._id);
+        db.collection('post').deleteOne(req.body, () => {
+            res.status(200).json({message : '해당 글을 삭제하였습니다!'});
+        })
+    })
+
+    // app.get('/edit/:id', (req, res) => {
+    //     res.status(200);
+    // })
+
+    // app.put('/update', (req, res) => {
+    //     res.status(200).json({message : '글 수정 완료!'});
+    // })
 
 
     //user의 데이터가 담겨있는 곳

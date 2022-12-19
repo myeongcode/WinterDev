@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import '../scss/Cards.scss';
 import {Box, Card, CardContent, Typography, CardMedia} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ const Cards = (props) => {
     const navigate = useNavigate();
 
     function handleOnPath() {
-        const cardURL = `/detail/${props.index}`;
+        const cardURL = `/detail/${props.idx}`;
         navigate(cardURL);
     }
 
@@ -26,19 +26,19 @@ const Cards = (props) => {
                         component='div' 
                         className='card-post-title'
                     >
-                        {props.data.title}
+                        {props.post.title}
                     </Typography>
                     <Typography 
                         variant='subtitle1' 
                         component='div' 
                         className='card-post-subtitle'
                     >
-                        {props.data.topic}
+                        {props.post.topic}
                     </Typography>
                 </CardContent>
                 <CardContent>
                     <Typography variant='p' component='div' className='card-post-inform'>
-                        {props.user.name}, {props.data.submitDate}
+                        {props.user.name}, {props.post.submitDate}
                     </Typography>
                 </CardContent>
             </Box>
