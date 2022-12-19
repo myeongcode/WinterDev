@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../scss/WritePost.scss';
 import { Box, Card, Typography, TextField, Button, FormControl, Alert } from '@mui/material';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
+import QuillEditor from './QuillEditor';
 
 
 const WritePost = (props) => {
@@ -11,10 +11,6 @@ const WritePost = (props) => {
   const [contents, setContents] = useState("");
   const [title, setTitle] = useState("");
   const [topic, setTopic] = useState("");
-
-  const onChangeContents = (text) => {
-    setContents(text);
-  }
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -59,7 +55,7 @@ const WritePost = (props) => {
             <FormControl onSubmit={onSubmit} fullWidth>
               <TextField className='write-content' name='title' onChange={onChangeTitle} label='글 제목' variant='outlined' />
               <TextField className='write-content' name='topic' onChange={onChangeTopic} label='글 주제' variant='outlined' />
-              <ReactQuill className='write-editor' value={contents} onChange={onChangeContents} />
+              <QuillEditor contents={contents} setContents={setContents} />
               <Button variant='contained' onClick={onSubmit}>글 게시</Button>
             </FormControl>
         </Card>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect } from "react";
 
 const post = [];
 
@@ -7,9 +8,9 @@ axios.get('/api/post')
     response.data.map((data, i) => {
         post[i] = data;
     })
-}, [])
+})
 
-const service = {
+const paginationService = {
     getData: ({from, to}) => {
         return new Promise((res, rej) => {
             const data = post.slice(from, to);
@@ -23,4 +24,4 @@ const service = {
 
 
 
-export default service;
+export default paginationService;

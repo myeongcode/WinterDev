@@ -27,7 +27,7 @@ const App = () => {
 
     axios.get('/api/post')
     .then((result) => {
-      
+
     })
     .catch((error) => {
       console.log(error);

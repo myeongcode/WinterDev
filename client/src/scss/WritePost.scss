@@ -17,9 +17,3 @@
 .write-content {
     @include set-padding(0, 0, 20px, 0);
 }
-
-.write-editor {
-    @extend .write-content;
-    @include set-height(800px);
-    @include set-padding(0, 0, 50px, 0);
-}

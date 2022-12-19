@@ -1,12 +1,15 @@
 import {Box, Typography, Container, Card, Divider} from '@mui/material';
 import '../scss/PostPage.scss';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 
 
 const PostPage = (props) => {
 
   const {id} = useParams();
+  useEffect(() => {
+    console.log(props);
+  })
 
   return (
     <Container>
@@ -33,8 +36,7 @@ const PostPage = (props) => {
                 {props.post[id].title}
               </Typography>
               <Divider />
-              <Box component='div' className='post-page-content' dangerouslySetInnerHTML={{ __html : props.post[id].contents }} />
-              
+              <Box variant='div' component='div' className='post-page-content' dangerouslySetInnerHTML={{ __html : props.post[id].contents }} />
             </Box>
             : <Typography variant='h4' align="center">Loading...</Typography>
           }

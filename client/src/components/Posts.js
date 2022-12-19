@@ -3,7 +3,7 @@ import '../scss/Posts.scss';
 import {Box, Pagination, Typography} from '@mui/material';
 import Cards from './Cards';
 import axios from 'axios';
-import service from '../services';
+import paginationService from '../services/paginationService';
 
 const Posts = (props) => {
 
@@ -16,7 +16,7 @@ const Posts = (props) => {
     })
 
     useEffect(() => {
-        service.getData({from : pagination.from, to : pagination.to})
+        paginationService.getData({from : pagination.from, to : pagination.to})
         .then((response) => {
             setPagination({...pagination, count:response.count});
             props.setPost(response.data);
@@ -26,7 +26,7 @@ const Posts = (props) => {
     const handlePageChange = (event, page) => {
         const from = (page - 1) * pageSize;
         const to = (page - 1) * pageSize + pageSize;
-
+        
         setPagination({...pagination, from : from, to : to});
     }
 
