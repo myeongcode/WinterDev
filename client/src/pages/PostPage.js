@@ -24,6 +24,8 @@ const PostPage = (props) => {
     })
   }, [id])
 
+  
+
   const handleDeletePost = () => {
     axios.delete('http://localhost:8080/delete', {data : {
       _id : realId
@@ -40,7 +42,7 @@ const PostPage = (props) => {
   }
 
   const handleUpdatePost = () => {
-    //window.location.href= '/edit/' + realId;
+    window.location.href = '/edit/' + realId; 
   }
 
   return (

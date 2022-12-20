@@ -51,18 +51,23 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
     app.delete('/delete', (req, res) => {
         req.body._id = parseInt(req.body._id);
         console.log(req.body._id);
-        db.collection('post').deleteOne(req.body, () => {
+        db.collection('post').deleteOne(req.body, (error, result) => {
+            if(error) {
+                return res.status(400).json({message : '삭제할 수 없습니다!'});
+            }
             res.status(200).json({message : '해당 글을 삭제하였습니다!'});
         })
     })
 
-    // app.get('/edit/:id', (req, res) => {
-    //     res.status(200);
-    // })
-
-    // app.put('/update', (req, res) => {
-    //     res.status(200).json({message : '글 수정 완료!'});
-    // })
+    //누군가가 /update경로로 put요청을 하면 데이터베이스의 post인 콜렉션에서 해당 데이터를 업데이트해주세요
+    app.put('/update', (req, res) => {
+        db.collection('post').updateOne({_id : req.body._id}, {$set : { title : req.body.title, topic : req.body.topic, contents : req.body.contents, submitDate : req.body.submitDate}}, (error, result) => {
+            if(error) {
+                return res.status(400).json({message : '수정할 수 없습니다!'});
+            }
+            res.status(200).json({message : '글 수정 완료!'});
+        })
+    })
 
 
     //user의 데이터가 담겨있는 곳

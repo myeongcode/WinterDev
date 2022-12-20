@@ -83,7 +83,7 @@ const App = () => {
           <PostPage posts={posts} handleAlertClick={handleAlertClick} />
         } />
         <Route path='/edit/:id' element={
-          <UpdatePage />
+          <UpdatePage handleAlertClick={handleAlertClick}/>
         } />
       </Routes>
 
