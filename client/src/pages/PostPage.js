@@ -72,7 +72,7 @@ const PostPage = (props) => {
                   {props.posts[id].title}
                 </Typography>
                 <Divider />
-                <Box variant='div' component='div' className='post-page-content' dangerouslySetInnerHTML={{ __html : props.posts[id].contents }} />
+                <Box variant='div' component='div' className='ql-editor post-page-content' dangerouslySetInnerHTML={{ __html : props.posts[id].contents }} />
               </Box>
             )
             : 
