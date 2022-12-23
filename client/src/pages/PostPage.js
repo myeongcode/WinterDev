@@ -1,17 +1,18 @@
-import {Box, Typography, Container, Card, Divider, CircularProgress, Button} from '@mui/material';
+import {Box, Typography, Container, Card, Divider, CircularProgress, Button, TextField, InputAdornment, Avatar} from '@mui/material';
 import '../scss/PostPage.scss';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import UpdatePage from './UpdatePage';
+import Comments from '../components/Comments';
 
 
 const PostPage = (props) => {
-  console.log('PostPage 재렌더링');
 
   const {id} = useParams();
   const [realId, setRealId] = useState(null);
-  
+
+  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState([]);
 
   
   useEffect(() => {
@@ -24,7 +25,17 @@ const PostPage = (props) => {
     })
   }, [id])
 
-  
+  useEffect(() => {
+    axios.get('/api/comment')
+    .then((result) => {
+      setComments(result.data);
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, [])
+
+
 
   const handleDeletePost = () => {
     axios.delete('http://localhost:8080/delete', {data : {
@@ -41,8 +52,43 @@ const PostPage = (props) => {
     })
   }
 
+  const onChangeComment = (e) => {
+    setComment(e.target.value);
+  }
+
   const handleUpdatePost = () => {
     window.location.href = '/edit/' + realId; 
+  }
+
+  const handlePostList = () => {
+    window.location.href = '/';
+  }
+
+  const handleAddComment = (e) => {
+    e.preventDefault();
+
+    const date = new Date();
+    const commentDate = date.toLocaleString('ko-kr');
+
+    const variables = {
+      userid : props.user._id,
+      postid : realId,
+      comment : comment,
+      commentDate : commentDate,
+    }
+
+    axios.post('http://localhost:8080/commentCreate', variables)
+    .then((response) => {
+      if(response) {
+        props.handleAlertClick('success', response.data.message);
+        setTimeout(() => {
+          window.location.href='/detail/' + id;
+        }, 2000)
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   return (
@@ -50,7 +96,7 @@ const PostPage = (props) => {
       <Box className='post-page-area'>
         <Card
           component='div'
-          className='post-page-card'
+          className='post-page-post'
         >
           { //만약 props.post[id]의 값이 있으면
             props.posts[id] ?
@@ -84,14 +130,57 @@ const PostPage = (props) => {
             )
           }
         </Card>
-        <Box sx={{
-          paddingTop : '20px',
-          paddingBottom : '20px',
-          display : 'flex',
-          justifyContent : 'space-between',
-        }}>
+        <Box className='post-page-buttons'>
           <Button color='success' variant='contained' onClick={handleUpdatePost}>글 수정</Button>
+          <Button variant='contained' onClick={handlePostList}>목록</Button>
           <Button color='error' variant='contained' onClick={handleDeletePost}>글 삭제</Button>
+        </Box>
+
+        <Box>
+          {
+            comments ?
+            comments.map((data, i) => {
+              if(data.postid == realId) {
+                return (<Comments key={i} user={props.user} id={id} data={data} handleAlertClick={props.handleAlertClick} />)
+              }
+            })
+            :
+            (
+              null
+            )
+          }
+          
+        </Box>
+
+        <Box sx={{
+          display : 'flex',
+          flexDirection : 'row',
+          paddingTop : '30px',
+          paddingBottom : '30px',
+          paddingRight : '5px',
+          paddingLeft : '5px'
+        }}>
+          <TextField
+          id="input-with-icon-textfield"
+          onChange={onChangeComment}
+          value={comment}
+          size='large'
+          placeholder='댓글'
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Avatar sx={{ width:'25px', height : '25px', marginLeft : '5px', marginRight : '5px' }}/>
+              </InputAdornment>
+            ),
+          }}
+          variant="standard"
+          sx={{
+            width : '100%',
+            paddingRight : '5px'
+          }}
+          />
+          <Button variant="contained" disableElevation onClick={handleAddComment}>게시</Button>
+        
         </Box>
       </Box>
     </Container>

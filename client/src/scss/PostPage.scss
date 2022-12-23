@@ -6,7 +6,7 @@
     @extend .post-area;
 }
 
-.post-page-card {
+.post-page-post {
     @extend .write-card-area;
     @include set-min-height(1100px);
 }
@@ -23,4 +23,16 @@
 .post-page-content {
     @include set-padding(10px, 0, 0, 0);
     @include set-word-break(break-all);
+}
+
+.post-page-buttons {
+    @include set-padding(20px, 0, 20px, 0);
+    @include set-display(flex);
+    @include set-justify-content(space-between);
+}
+
+.post-page-comment {
+    @extend .write-card-area;
+    @include set-padding(0, 0, 0, 0);
+    @include set-margin(20px, 0, 0, 0);
 }

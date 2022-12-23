@@ -52,7 +52,7 @@ const UpdatePage = (props) => {
         title : title,
         topic : topic,
         contents : contents,
-        submitDate : submitDate,
+        submitDate : `${submitDate} (수정됨)`,
       }
 
       

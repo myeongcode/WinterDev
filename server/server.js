@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
 var cors = require('cors');
+const { ObjectId } = require('mongodb');
 var db;
 
 app.use(express.urlencoded({extended: true}));
@@ -50,7 +51,6 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
     //누군가가 /delete경로로 delete요청을 하면 데이터베이스의 post인 콜렉션에서 해당 데이터를 하나 삭제해주세요
     app.delete('/delete', (req, res) => {
         req.body._id = parseInt(req.body._id);
-        console.log(req.body._id);
         db.collection('post').deleteOne(req.body, (error, result) => {
             if(error) {
                 return res.status(400).json({message : '삭제할 수 없습니다!'});
@@ -69,6 +69,25 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
         })
     })
 
+    //누군가가 /commentCreate로 post요청을 하면 데이터베이스의 comment인 콜렉션에 입력받은 데이터를 저장해주세요
+    app.post('/commentCreate', (req, res) => {
+        db.collection('comment').insertOne(req.body, (error, result) => {
+            if(error) {
+                return res.status(400).json({message : '댓글 게시 실패!'});
+            }
+            res.status(200).json({message : '댓글 게시 완료!'});
+        })
+    })
+
+    app.delete('/commentDelete', (req, res) => {
+        db.collection('comment').deleteOne({ "_id" : ObjectId(req.body._id)}, (error, result) => {
+            if(error) {
+                return res.status(400).json({message : '삭제할 수 없습니다!'});
+            }
+            res.status(200).json({message : '해당 댓글을 삭제하였습니다!'});
+        })
+    })
+
 
     //user의 데이터가 담겨있는 곳
     app.get('/api/user', (req, res) => {
@@ -80,6 +99,13 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
     //post의 데이터가 담겨있는 곳
     app.get('/api/post', (req, res) => {
         db.collection('post').find().toArray((error ,result) => {
+            res.send(result);
+        })
+    })
+
+    //comment의 데이터가 담겨있는 곳
+    app.get('/api/comment', (req, res) => {
+        db.collection('comment').find().toArray((error, result) => {
             res.send(result);
         })
     })

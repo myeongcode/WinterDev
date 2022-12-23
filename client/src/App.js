@@ -15,7 +15,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const App = () => {
-  console.log('App 페이지 재랜더링');
   
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -80,7 +79,7 @@ const App = () => {
           <WritePage handleAlertClick={handleAlertClick} />
         } />
         <Route path='/detail/:id' element={
-          <PostPage posts={posts} handleAlertClick={handleAlertClick} />
+          <PostPage posts={posts} handleAlertClick={handleAlertClick} user={user} />
         } />
         <Route path='/edit/:id' element={
           <UpdatePage handleAlertClick={handleAlertClick}/>

@@ -7,7 +7,6 @@ import usePagination from '../services/Pagination';
 
 
 const Posts = (props) => {
-    console.log('Posts컴포넌트 재랜더링');
     
     // const [pagination, setPagination] = useState({
     //     count : 0,
