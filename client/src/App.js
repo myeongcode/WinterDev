@@ -17,12 +17,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const App = () => {
-
-  const [imgContent, setImgContents] = useState('');
-  const [uploadedImg, setUploadedImg] = useState({
-    fileName : '',
-    filePath : ''
-  })
   
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);

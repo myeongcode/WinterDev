@@ -1,49 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../scss/Posts.scss';
-import {Box, Pagination, Typography} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import Cards from './Cards';
-import usePagination from '../services/Pagination';
 
 
 
 const Posts = (props) => {
-    
-    // const [pagination, setPagination] = useState({
-    //     count : 0,
-    //     from : 0,
-    //     to : pageSize
-    // })
-
-    // const _DATA = usePagination(props.posts);
-
-    // useEffect(() => {
-    //     _DATA.getData({from : pagination.from, to : pagination.to})
-    //     .then((response) => {
-    //         setPagination({...pagination, count : response.count});
-    //         props.setPosts(response.data);
-    //     })
-    // }, [pagination.from, pagination.to]);
-
-    // const handlePageChange = (event, page) => {
-    //     const from = (page - 1) * pageSize;
-    //     const to = (page - 1) * pageSize + pageSize;
-
-    //     setPagination({...pagination, from : from, to : to});
-    // }
-
-
-    
-
-    // useEffect(() => {
-    //     paginationService.getData({from : pagination.from, to : pagination.to})
-    //     .then((response) => {
-    //         setPagination({...pagination, count:response.count});
-    //         props.setPosts(response.data);
-    //     })
-    // }, [pagination.from, pagination.to]);
-
-    
-
     return(
         <Box className='post-area'>
             <Typography
@@ -67,7 +29,6 @@ const Posts = (props) => {
                 alignItems : 'center',
                 justifyContent : 'center',
             }}>
-                {/* <Pagination color='primary' /> */}
             </Box>
         </Box>
     )
