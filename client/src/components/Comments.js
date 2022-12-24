@@ -1,4 +1,5 @@
 import React from 'react';
+import '../scss/Comments.scss';
 import {Box, Typography, Card, Avatar, Button} from '@mui/material';
 import axios from 'axios';
 
@@ -22,36 +23,16 @@ const Comments = (props) => {
     }
 
   return (
-    <Card className='post-page-comment'>
-        <Box sx={{
-            display : 'flex',
-            flexDirection : 'row',
-            justifyContent : 'space-between'
-        }}>
-            <Box sx={{
-                padding : '10px',
-                display : 'flex',
-                flexDirection : 'row',
-                alignItems : 'center',
-            }}>
+    <Card className='comment-card'>
+        <Box className='comment-container'>
+            <Box className='comment-content'>
                 <Avatar />
-                <Typography sx={{
-                fontSize : '18px',
-                fontWeight : '700',
-                paddingLeft : '10px',
-                paddingRight : '10px',
-                whiteSpace : 'nowrap',
-                }}>
+                <Typography className='comment-username'>
                 {props.user.name}
                 </Typography>
-                <Typography sx={{
-                wordBreak : 'break-all',
-                }}>{props.data.comment}</Typography>
+                <Typography className='comment-text'>{props.data.comment}</Typography><Typography sx={{ display:'flex', fontSize : '12px', margin : '10px', color : 'lightgray', fontWeight : '200'}}>{props.data.commentDate}</Typography>
             </Box>
-            <Button onClick={handleDeleteComment} sx={{
-                margin : '10px',
-                color : 'red',
-            }}>삭제</Button>
+            <Button className='comment-btn' onClick={handleDeleteComment}>삭제</Button>
         </Box>
     </Card>
   )

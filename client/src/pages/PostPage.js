@@ -18,7 +18,10 @@ const PostPage = (props) => {
   useEffect(() => {
     axios.get('/api/post')
     .then((result) => {
-      setRealId(result.data[id]._id);
+      const newPostOrder = result.data.sort((a, b) => {
+        return b._id - a._id;
+      })
+      setRealId(newPostOrder[id]._id);
     })
     .catch((error) => {
       console.log(error);
@@ -152,14 +155,7 @@ const PostPage = (props) => {
           
         </Box>
 
-        <Box sx={{
-          display : 'flex',
-          flexDirection : 'row',
-          paddingTop : '30px',
-          paddingBottom : '30px',
-          paddingRight : '5px',
-          paddingLeft : '5px'
-        }}>
+        <Box className='post-comment-box' >
           <TextField
           id="input-with-icon-textfield"
           onChange={onChangeComment}
@@ -169,15 +165,12 @@ const PostPage = (props) => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Avatar sx={{ width:'25px', height : '25px', marginLeft : '5px', marginRight : '5px' }}/>
+                <Avatar className='post-comment-avatar'/>
               </InputAdornment>
             ),
           }}
           variant="standard"
-          sx={{
-            width : '100%',
-            paddingRight : '5px'
-          }}
+          className='post-comment-input'
           />
           <Button variant="contained" disableElevation onClick={handleAddComment}>게시</Button>
         

@@ -1,0 +1,37 @@
+@import './reset.scss';
+@import './WritePost.scss';
+
+.comment-card {
+    @extend .write-card-area;
+    @include set-padding(0, 0, 0, 0);
+    @include set-margin(20px, 0, 0, 0);
+}
+
+.comment-container {
+    @include set-display(flex);
+    @include set-flex-direction(row);
+    @include set-justify-content(space-between);
+}
+
+.comment-content {
+    @include set-padding(10px, null,null,null);
+    @include set-display(flex);
+    @include set-flex-direction(row);
+    @include set-align-item(center);
+}
+
+.comment-username {
+    @include set-font-size(18px);
+    @include set-font-weight(700);
+    @include set-padding(0, 10px, 0, 10px);
+    white-space: nowrap !important;
+}
+
+.comment-text {
+    word-break: break-all !important;
+}
+
+.comment-btn {
+    @include set-margin(10px, null, null, null);
+    @include set-color(red);
+}

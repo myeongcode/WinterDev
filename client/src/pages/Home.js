@@ -4,7 +4,7 @@ import Posts from '../components/Posts';
 import Profile from '../components/Profile';
 
 const Home = (props) => {
-  
+
   return (
     <Container>
       <Grid container spacing={1}>

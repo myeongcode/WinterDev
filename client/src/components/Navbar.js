@@ -48,7 +48,7 @@ const Navbar = (props) => {
                             className='navbar-button'
                         >새 글 쓰기</Button>
                         <Button
-                            href='/'
+                            href='/profile'
                             className='navbar-button'
                         >마이페이지</Button>
                     </Stack>
@@ -87,9 +87,6 @@ const Navbar = (props) => {
                         open={Boolean(userMenu)}
                         onClose={handleCloseUserMenu}
                     >
-                        <MenuItem>개인정보 변경</MenuItem>
-                        <MenuItem>관리자 페이지</MenuItem>
-                        <Divider />
                         <MenuItem>로그아웃</MenuItem>
                     </Menu>
                 </Toolbar>

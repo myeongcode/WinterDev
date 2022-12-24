@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import Quill from 'quill';
 import {Box} from '@mui/material';
 import '../scss/QuillEditor.scss';
+import ImageResize from 'quill-image-resize';
+Quill.register('modules/ImageResize', ImageResize);
 
 function QuillEditor(props) {
 
@@ -16,6 +19,9 @@ function QuillEditor(props) {
             ['image', 'video', 'link'],
             ['clean']  
         ],
+        ImageResize: {
+            parchment: Quill.import('parchment')
+        }
     };
     
 

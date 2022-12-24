@@ -20,7 +20,11 @@ const UpdatePage = (props) => {
   useEffect(() => {
     axios.get('/api/post')
     .then((response) => {
-      response.data.map((editpost, idx) => {
+      const newPostOrder = response.data.sort((a, b) => {
+        return b._id - a._id;
+      })
+
+      newPostOrder.map((editpost, idx) => {
         if(editpost._id == editId) {
           setArrayId(idx);
           setTitle(editpost.title);

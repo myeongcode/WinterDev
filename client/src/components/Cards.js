@@ -3,6 +3,7 @@ import '../scss/Cards.scss';
 import {Box, Card, CardContent, Typography, CardMedia} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+
 const Cards = (props) => {
 
     const navigate = useNavigate();
@@ -42,11 +43,6 @@ const Cards = (props) => {
                     </Typography>
                 </CardContent>
             </Box>
-            <CardMedia 
-                component='img'
-                className='card-post-media'
-                src='/static/images/postImages/sea.jpg'
-            />
         </Card>
     )
 }

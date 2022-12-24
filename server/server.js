@@ -79,6 +79,7 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
         })
     })
 
+    //누군가가 /commentDelete로 delete요청하면 comment 콜렉션에서 id가 req.body._id 인 것을 삭제
     app.delete('/commentDelete', (req, res) => {
         db.collection('comment').deleteOne({ "_id" : ObjectId(req.body._id)}, (error, result) => {
             if(error) {
@@ -87,8 +88,6 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0.oymstvd.mongodb.net/?ret
             res.status(200).json({message : '해당 댓글을 삭제하였습니다!'});
         })
     })
-
-
     //user의 데이터가 담겨있는 곳
     app.get('/api/user', (req, res) => {
         db.collection('user').find().toArray((error, result) => {
