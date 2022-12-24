@@ -1,5 +1,7 @@
 # blog 개인프로젝트
 
+<span style="font-size : 10px; color : orange;">+ 12/24 1차 완성코드 push하였고 pagination과 이미지처리를 조금 더 파악하고 나면 추후에 수정할 예정입니다.</span>
+
 ## 프로젝트에 대한 개요
 - 블로그의 기본적인 기능인 CRUD를 구현
 - 웹에디터를 연결하여 이미지, 정렬, 폰트 등을 처리
@@ -139,7 +141,7 @@
 ---
 
 ## 코드 중 확인받고 싶은 부분
-1. 댓글을 작성, 삭제 등을 수행한 후 랜더링 할 때의 window.location.href로 랜더링을 하는 것이 바람직한지
+1. <h3 style="font-weight : 700;">댓글을 작성, 삭제 등을 수행한 후 랜더링 할 때의 window.location.href로 랜더링을 하는 것이 바람직한지</h3>
 
 ```jsx
 (Comments.js)
@@ -165,7 +167,7 @@ const handleDeleteComment = (e) => {
 ...
 ```
 
-2. state를 어느 위치에서 선언하는게 맞는건지
+2. <h3 style="font-weight : 700;">state를 어느 위치에서 선언하는게 맞는건지</h3>
 저같은 경우 모든 컴포넌트가 필요한 state(user, posts, alert)만을 메인페이지인 App.js에 선언을 했지만 PostPage, UpdatePage, WritePage에만 필요한 state들을 제가 작성한 것처럼 해당하는 곳에 위치하는게 좋은건지 모든 파일의 부모인 App.js에 모두 선언하여 props로 사용하는 것이 좋은건지 모르겠습니다..!
 
 
@@ -173,10 +175,10 @@ const handleDeleteComment = (e) => {
 
 ## 개발관련 과정에서 궁금했던 부분
 
-1. useEffect 사용
+1. <h3 style="font-weight : 700;">useEffect 사용</h3>
 저는 주로 useEffect를 axios.get으로 데이터들을 가져올 때 사용을 하고있습니다.
 제가 작성했던 axios처리 코드 말고도 또 들어갔으면 좋았을 코드들이 어떠한 것들이 있는지 궁금합니다.
 
-2. 이미지 처리
+2. <h3 style="font-weight : 700;">이미지 처리</h3>
 원래는 multer 라이브러리를 사용하여 각 포스트별로 썸네일 이미지를 등록하여 카드 오른쪽부분에 표시하려했습니다.
 하지만 input태그로 type은 file로 지정한 상태에서 이미지를 받아 state함수에 값을 넣었지만 state는 계속 비어있다고만 표시가 되었습니다. 콘솔로 출력할 때에는 잘 출력이 되었지만 state함수에 값을 넣고 그 state를 출력하면 값이 출력되지 않았습니다. Prototype을 보니 [Object List]라고 되어있었는데 state에는 List 자료형을 넣을 수 없는지 궁금합니다.
