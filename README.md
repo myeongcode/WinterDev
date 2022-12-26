@@ -26,6 +26,11 @@
 
 ---
 
+## 프로세스
+<p align="center">
+![image](https://user-images.githubusercontent.com/67165016/209527636-094e21e3-c874-411f-8432-993e1343f563.png)
+</p>
+
 ## 컴포넌트 설명
 - App.js : 메인 파일 및 Route경로 지정파일
 
